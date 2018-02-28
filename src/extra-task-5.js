@@ -1,0 +1,27 @@
+/*
+
+Perform a search and replace on the sentence using the arguments provided and return the new sentence.
+
+First argument is the sentence to perform the search and replace on.
+
+Second argument is the word that you will be replacing (before).
+
+Third argument is what you will be replacing the second argument with (after).
+
+NOTE: Preserve the case of the original word when you are replacing it. For example if you mean to replace the word "Book" with the word "dog", it should be replaced as "Dog"
+
+*/
+function wordSentenceStyle(word) {
+    const arr = word.split("");
+    arr[0] = arr[0].toUpperCase();
+    return arr.join();
+}
+function myReplace(str, before, after) {
+    const regExp1 = new RegExp(wordSentenceStyle(before), "g");
+    const regExp2 = new RegExp(before.toLowerCase(), "g");
+    str = str.replace(regExp1, wordSentenceStyle(after));
+    str = str.replace(regExp2, after.toLowerCase());
+    return str;
+}
+
+console.log(myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped"));
