@@ -3,19 +3,21 @@
 */
 
 function sym(args) {
-    if (arguments.length < 2 || !Array.isArray(arguments[0]) || !Array.isArray(arguments[1])) {
-        return args;
+    if (!arguments.length) {
+        return null;
     }
-    const setA = new Set(arguments[0]);
-    const setB = new Set(arguments[1]);
-    for (const item of setA) {
-        if (setB.has(item)) {
-            setB.delete(item);
-        } else {
-            setB.add(item);
+    const resultSet = new Set(arguments[0]);
+    for (let i = 1; i < arguments.length; i++) {
+        const setA = new Set(arguments[i]);
+        for (const item of setA) {
+            if (resultSet.has(item)) {
+                resultSet.delete(item);
+            } else {
+                resultSet.add(item);
+            }
         }
     }
-    return [...setB].sort((a, b) => a - b);
+    return [...resultSet].sort((a, b) => a - b);
 }
 
-console.log(sym([1, 2, 3], [5, 2, 1, 4]));
+console.log(sym([1, 2, 3], [5, 2, 1, 4], [4, 5]));
